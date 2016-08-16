@@ -15,10 +15,18 @@ def user_yes_no_query(question):
 
 
 # Ask questions to define usage
-list_path = raw_input("Please specify the full path of the url list: ")
+list_path = raw_input("Please specify the full (or relative to this file) path of the url list file: ")
+
+# Make sure the file exists
 if os.path.isfile(list_path) is False:
 	print("This is not a valid file")
 	exit(1)
+
 follow_redirects = user_yes_no_query("Follow redirects?")
 file_output = user_yes_no_query("Output to good.txt and bad.txt? If not, it will just print to terminal")
 
+f = open(list_path, 'r')
+urls = f.readlines()
+
+for url in urls:
+	print(url)
